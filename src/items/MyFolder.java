@@ -20,8 +20,8 @@ public class MyFolder extends Item
 	
 	private static final long serialVersionUID = 1L;
 	
-	private List<Item> folders;
-	private List<Item> files;
+	private List<MyFolder> folders;
+	private List<MyFile> files;
 	
 	
 	
@@ -30,18 +30,18 @@ public class MyFolder extends Item
 	public MyFolder(File file)
 	{
 		super(file);
-		folders = new ArrayList<Item>();
-		files   = new ArrayList<Item>();
+		folders = new ArrayList<MyFolder>();
+		files   = new ArrayList<MyFile>();
 	}
 
 	
 	
 //// getters & setters
 	
-	public void setFolders(List<Item> items)	{ folders = items;	}
-	public void setFiles(List<Item> items)		{ files = items;	}
-	public List<Item> getFolders()				{ return folders;	}
-	public List<Item> getFiles()				{ return files;		}
+	public void setFolders(List<MyFolder> items){ folders = items;	}
+	public void setFiles(List<MyFile> items)	{ files = items;	}
+	public List<MyFolder> getFolders()			{ return folders;	}
+	public List<MyFile> getFiles()				{ return files;		}
 	
 	
 	
@@ -51,15 +51,43 @@ public class MyFolder extends Item
 	{
 		files.add(new MyFile(file));
 	}
-	public void addFolder(File folder)
+	public void addFolder(MyFolder folder)
 	{
-		folders.add(new MyFolder(folder));
+		folders.add(folder);
 	}
 	
 	public void sort()
 	{
 		Collections.sort(folders);
 		Collections.sort(files);
+	}
+	
+	
+	public String disp(int tabs)
+	{
+		String padding = "";
+		for (int i=0; i< tabs; i++)
+			padding += "---";
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(padding).append("|-> ").append(super.getName()).append("\n");
+		
+		for (MyFolder folder : folders)
+		{
+			sb.append(folder.disp(tabs+1));
+		}
+		for (MyFile file : files)
+		{
+			sb.append(padding).append(padding).append("|-- ").append(file.getName()).append("\n");
+		}
+		
+		return sb.toString();
+	}
+	
+	public void printTree()
+	{
+		System.out.println("\n\n");
+		System.out.println(disp(0));
 	}
 	
 

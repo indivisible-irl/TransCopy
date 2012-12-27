@@ -26,19 +26,23 @@ public class Prepare
 	
 	private static MyFolder populate(MyFolder folder)
 	{
+		System.out.println("Populate: " +folder.getLocation());
+		
 		File[] contents = folder.getSelf().listFiles();
+		
 		if (contents != null)
 		{
 			for (File file : contents)
 			{
+				System.out.println(file.getAbsolutePath());
 				if (file.isFile())
 				{
 					folder.addFile(file);
 				}
 				else if (file.isDirectory())
 				{
-					folder = populate(folder);
-					folder.addFolder(file);
+					MyFolder f = populate(new MyFolder(file));
+					folder.addFolder(f);
 				}
 				else
 				{
@@ -48,6 +52,8 @@ public class Prepare
 			folder.sort();
 			return folder;
 		}
+		
+		System.out.println("No contents");
 		//TODO want to recreate empty folders??
 		return folder;
 	}
