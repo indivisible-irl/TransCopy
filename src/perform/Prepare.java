@@ -26,7 +26,7 @@ public class Prepare
 	
 	private static MyFolder populate(MyFolder folder)
 	{
-		System.out.println("Populate: " +folder.getLocation());
+		//System.out.println("Populate: " +folder.getLocation());
 		
 		File[] contents = folder.getSelf().listFiles();
 		
@@ -34,7 +34,7 @@ public class Prepare
 		{
 			for (File file : contents)
 			{
-				System.out.println(file.getAbsolutePath());
+				//System.out.println(file.getAbsolutePath());
 				if (file.isFile())
 				{
 					folder.addFile(file);

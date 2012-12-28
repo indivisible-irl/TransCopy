@@ -9,14 +9,19 @@ public class Main {
 	public static void main(String[] args) {
 		
 
-		String path = "C:/tmp/test";
-		File root = test(path);
+		String pathS = "C:/tmp/test";
+		String pathD = "C:/tmp/test2";
+		
+		File root = test(pathS);
 		
 		if (root != null)
 		{
 			MyFolder folder = Prepare.prepare(root);
 			folder.printTree();
 		}
+		
+		Job job = JobHandler.newJob("TEST JOB", pathS, pathD);
+		job.disp();
 		
 	}
 	
