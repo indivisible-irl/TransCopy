@@ -14,13 +14,22 @@ import items.Job;
 import items.MyFile;
 import items.MyFolder;
 
+
+@SuppressWarnings("unused")	//FIXME
 public class Copy {
 
 	
+	public static void testCopy(MyFile source, File dest)
+	{
+		if (copyFile(source, dest))
+			System.out.println("\tCopied successfully");
+		else
+			System.out.println("\tUNSUCCESSFUL COPY");
+	}
+	
 	public static Job copy(Job job)
 	{
-		
-		
+		//TODO call recur on whole job (root MyFolder)
 		return job;
 	}
 	
@@ -29,7 +38,7 @@ public class Copy {
 	{
 		for (MyFile file : folder.getFiles())
 		{
-			//TODO
+			//TODO actual recur copy with multi attempt (numAttempts++)
 		}
 	}
 	
@@ -38,21 +47,33 @@ public class Copy {
 		File sourceFile = sFile.getSelf();
 		
 		if (!sourceFile.canRead())
+		{
+			System.out.println("Cannot read source file. Not exists or no permissions");
 			return false;
+		}
 		
 		InputStream in = null;
 		OutputStream out = null;
 		
 		try
 		{
-			in = new BufferedInputStream(new FileInputStream(sourceFile), 1024);
-			out = new BufferedOutputStream(new FileOutputStream(destFile), 1024);
+			//TODO specify buffer size? setting?
+			in = new BufferedInputStream(new FileInputStream(sourceFile));
+			out = new BufferedOutputStream(new FileOutputStream(destFile));
 			
+			byte[] buffer = new byte[2];
+			int bytes = -1;
 			
+			while ((bytes = in.read(buffer)) > 0)
+			{
+				out.write(buffer, 0, bytes);
+			}
 			return true;
 		}
 		catch (FileNotFoundException e)
 		{
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally

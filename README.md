@@ -11,3 +11,5 @@ TODO
 - Allow for skipping of system files (*.db, *.thumbs, .folder, hidden or archive attributes etc etc) [use checkbox in options eventually]
 
 - Custom filters for only copy and ignore. Filter by extension and name (sep for files and folders)
+
+- Move option that deletes on sucessful copy. Enforces verify to ensure valid data or just warn?

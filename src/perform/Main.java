@@ -9,19 +9,23 @@ public class Main {
 	public static void main(String[] args) {
 		
 
-		String pathS = "C:/tmp/test";
-		String pathD = "C:/tmp/test2";
+		MyFile source = new MyFile(new File("C:/tmp/file01.txt"));
+		File dest = new File("C:/tmp/file02.txt");
+		Copy.testCopy(source, dest);
 		
-		File root = test(pathS);
-		
-		if (root != null)
-		{
-			MyFolder folder = Prepare.prepare(root);
-			folder.printTree();
-		}
-		
-		Job job = JobHandler.newJob("TEST JOB", pathS, pathD);
-		job.disp();
+//		String pathS = "C:/tmp/test";
+//		String pathD = "C:/tmp/test2";
+//		
+//		File root = test(pathS);
+//		
+//		if (root != null)
+//		{
+//			MyFolder folder = Prepare.prepare(root);
+//			folder.printTree();
+//		}
+//		
+//		Job job = JobHandler.newJob("TEST JOB", pathS, pathD);
+//		job.disp();
 		
 	}
 	
